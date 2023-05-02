@@ -19,19 +19,27 @@ args.forEach(function (arg) {
 
 function problemA() {
   // callback version
-  exerciseUtils.readFile("poem-two/stanza-01.txt", function (err, stanza) {
+  /* exerciseUtils.readFile("poem-two/stanza-01.txt", function (err, stanza) {
     exerciseUtils.blue(stanza);
   });
   exerciseUtils.readFile("poem-two/stanza-02.txt", function (err, stanza) {
     exerciseUtils.blue(stanza);
-  });
+  }); */
 
   // promise version
   // Tu código acá:
+  const Promis = (numPoema)=>{
+    exerciseUtils
+      .promisifiedReadFile(`poem-two/stanza-${numPoema}.txt`)
+      .then((resp) => exerciseUtils.blue(resp))
+  }
+  Promise.all([Promis('01'), Promis('02') ])
+  console.log('done')
+  
 }
 
 function problemB() {
-  let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+ /*  let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
     return "poem-two/" + "stanza-0" + n + ".txt";
   });
   let randIdx = Math.floor(Math.random() * filenames.length);
@@ -43,11 +51,18 @@ function problemB() {
       exerciseUtils.blue(stanza);
       if (err) exerciseUtils.magenta(new Error(err));
     });
-  });
+  }); */
 
   // promise version
   // Tu código acá:
-}
+  const Promis = (numPoema)=>{
+    exerciseUtils
+      .promisifiedReadFile(`poem-two/stanza-${numPoema}.txt`)
+      .then((resp) => exerciseUtils.blue(resp))
+  }
+  Promise.all(['01', '02', '03', '04', '05', '06', '07', '08'].map((num)=> Promis(num)))
+  .catch((err) => exerciseUtils.magenta(new Error(err)))
+  }
 
 // EJERCICIO EXTRA
 function problemC() {
